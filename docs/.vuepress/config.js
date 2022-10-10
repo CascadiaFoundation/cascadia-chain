@@ -1,6 +1,6 @@
 module.exports = {
   theme: "cosmos",
-  title: "Evmos Documentation",
+  title: "Cascadia Documentation",
   locales: {
     "/": {
       lang: "en-US",
@@ -71,12 +71,12 @@ module.exports = {
     editLinks: true,
     custom: true,
     project: {
-      name: "Evmos",
-      denom: "Evmos",
-      ticker: "EVMOS",
-      binary: "evmosd",
-      testnet_denom: "tEvmos",
-      testnet_ticker: "tEVMOS",
+      name: "Cascadia",
+      denom: "Cascadia",
+      ticker: "CASCADIA",
+      binary: "cascadiad",
+      testnet_denom: "tCascadia",
+      testnet_ticker: "tCASCADIA",
       rpc_url: "https://eth.bd.evmos.org:8545",
       rpc_url_testnet: "https://eth.bd.evmos.dev:8545",
       rpc_url_local: "http://localhost:8545/",

@@ -3,9 +3,9 @@ before:
   - go mod download
 
 builds:
-  - id: "evmosd-darwin"
-    main: ./cmd/evmosd
-    binary: bin/evmosd
+  - id: "cascadiad-darwin"
+    main: ./cmd/cascadiad
+    binary: bin/cascadiad
     env:
       - CGO_ENABLED=1
       - CC=o64-clang
@@ -18,9 +18,9 @@ builds:
         - -tags=cgo
     ldflags:
       - -s -w -X github.com/cosmos/cosmos-sdk/version.Name=evmos -X github.com/cosmos/cosmos-sdk/version.AppName=evmosd -X github.com/cosmos/cosmos-sdk/version.Version={{.Version}} -X github.com/cosmos/cosmos-sdk/version.Commit={{.Commit}}
-  - id: "evmosd-darwin-arm64"
-    main: ./cmd/evmosd
-    binary: bin/evmosd
+  - id: "cascadiad-darwin-arm64"
+    main: ./cmd/cascadiad
+    binary: bin/cascadiad
     env:
       - CGO_ENABLED=1
       - CC=oa64-clang
@@ -33,9 +33,9 @@ builds:
       - -tags=cgo
     ldflags:
       - -s -w -X github.com/cosmos/cosmos-sdk/version.Name=evmos -X github.com/cosmos/cosmos-sdk/version.AppName=evmosd -X github.com/cosmos/cosmos-sdk/version.Version={{.Version}} -X github.com/cosmos/cosmos-sdk/version.Commit={{.Commit}}
-  - id: "evmosd-linux"
-    main: ./cmd/evmosd
-    binary: bin/evmosd
+  - id: "cascadiad-linux"
+    main: ./cmd/cascadiad
+    binary: bin/cascadiad
     env:
       - CGO_ENABLED=1
       - CC=gcc
@@ -48,9 +48,9 @@ builds:
       - -tags=cgo
     ldflags:
       - -s -w -X github.com/cosmos/cosmos-sdk/version.Name=evmos -X github.com/cosmos/cosmos-sdk/version.AppName=evmosd -X github.com/cosmos/cosmos-sdk/version.Version={{.Version}} -X github.com/cosmos/cosmos-sdk/version.Commit={{.Commit}}
-  - id: "evmosd-linux-arm64"
-    main: ./cmd/evmosd
-    binary: bin/evmosd
+  - id: "cascadiad-linux-arm64"
+    main: ./cmd/cascadiad
+    binary: bin/cascadiad
     env:
       - CGO_ENABLED=1
       - CC=aarch64-linux-gnu-gcc
@@ -63,9 +63,9 @@ builds:
       - -tags=cgo
     ldflags:
       - -s -w -X github.com/cosmos/cosmos-sdk/version.Name=evmos -X github.com/cosmos/cosmos-sdk/version.AppName=evmosd -X github.com/cosmos/cosmos-sdk/version.Version={{.Version}} -X github.com/cosmos/cosmos-sdk/version.Commit={{.Commit}}
-  - id: "evmosd-windows"
-    main: ./cmd/evmosd
-    binary: bin/evmosd
+  - id: "cascadiad-windows"
+    main: ./cmd/cascadiad
+    binary: bin/cascadiad
     env:
       - CGO_ENABLED=1
       - CC=x86_64-w64-mingw32-gcc
@@ -90,11 +90,11 @@ archives:
     - goos: windows
       format: zip
   builds:
-  - evmosd-darwin
-  - evmosd-darwin-arm64
-  - evmosd-windows
-  - evmosd-linux
-  - evmosd-linux-arm64
+  - cascadiad-darwin
+  - cascadiad-darwin-arm64
+  - cascadiad-windows
+  - cascadiad-linux
+  - cascadiad-linux-arm64
   
 checksum:
   name_template: 'checksums.txt'
