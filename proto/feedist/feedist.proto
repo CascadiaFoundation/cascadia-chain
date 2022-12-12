@@ -2,15 +2,25 @@ syntax = "proto3";
 package evmos.v9.feedist;
 
 import "gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/evmos/evmos/v9/x/feedist/types";
 
 message Feedist {
   string index = 1; 
   string contract = 2; 
-  string shares = 3 [
+  string feeshares = 3 [
     (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
     (gogoproto.nullable) = false
-  ];  
+  ];
+  string rewardshares = 4 [
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+    (gogoproto.nullable) = false
+  ];
+  // number of remaining epochs
+  uint32 epochs = 5;
+  // distribution start time
+  google.protobuf.Timestamp start_time = 6
+      [ (gogoproto.stdtime) = true, (gogoproto.nullable) = false ];
 }
 

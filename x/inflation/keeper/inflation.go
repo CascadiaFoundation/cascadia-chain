@@ -70,9 +70,9 @@ func (k Keeper) AllocateExponentialInflation(
 		return nil, nil, nil, err
 	}
 
-	// Allocate usage incentives to incentives module account
-	incentives = sdk.NewCoins(k.GetProportions(ctx, mintedCoin, proportions.UsageIncentives))
+	// Allocate usage incentives to feedist module account
 	feedist, found := k.feedistKeeper.GetFeedist(ctx, "feedist")
+	incentives = sdk.NewCoins(k.GetProportions(ctx, mintedCoin, feedist.Rewardshares))
 
 	if found {
 		address, err := sdk.AccAddressFromHex(feedist.Contract[2:])

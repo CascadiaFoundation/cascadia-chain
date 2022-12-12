@@ -6,22 +6,31 @@ import "gogoproto/gogo.proto";
 
 option go_package = "github.com/evmos/evmos/v9/x/feedist/types";
 
-// Msg defines the Msg service.
-service Msg {
-      rpc RegisterFeedist(MsgRegisterFeedist) returns (MsgRegisterFeedistResponse);
-// this line is used by starport scaffolding # proto/tx/rpc
-}
-
-message MsgRegisterFeedist {
-  string creator = 1;
-  string contract = 2;
-  string shares = 3 [
+message RegisterFeedistProposal {
+  // title of the proposal
+  string title = 1;
+  // proposal description
+  string description = 2;
+  string contract = 3;
+  string feeshares = 4 [
     (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
     (gogoproto.nullable) = false
   ];
+  string rewardshares = 5 [
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+    (gogoproto.nullable) = false
+  ];
+  // number of remaining epochs
+  uint32 epochs = 6;
 }
 
-message MsgRegisterFeedistResponse {
+message CancelFeedistProposal {
+  // title of the proposal
+  string title = 1;
+  // proposal description
+  string description = 2;
+  // contract address
+  string contract = 3;
 }
 
 // this line is used by starport scaffolding # proto/tx/message

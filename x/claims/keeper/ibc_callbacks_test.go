@@ -222,11 +222,7 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 		{
 			"fail - invalid sender",
 			func() {
-<<<<<<< Updated upstream
 				transfer := transfertypes.NewFungibleTokenPacketData("uCC", "100", "cascadia", receiverStr)
-=======
-				transfer := transfertypes.NewFungibleTokenPacketData("uCC", "100", "evmos", receiverStr)
->>>>>>> Stashed changes
 				bz := transfertypes.ModuleCdc.MustMarshalJSON(&transfer)
 				packet := channeltypes.NewPacket(bz, 1, transfertypes.PortID, "channel-0", transfertypes.PortID, "channel-0", timeoutHeight, 0)
 

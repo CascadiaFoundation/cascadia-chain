@@ -127,6 +127,7 @@ import (
 	erc20client "github.com/evmos/evmos/v9/x/erc20/client"
 	erc20keeper "github.com/evmos/evmos/v9/x/erc20/keeper"
 	erc20types "github.com/evmos/evmos/v9/x/erc20/types"
+	"github.com/evmos/evmos/v9/x/feedist"
 	"github.com/evmos/evmos/v9/x/incentives"
 	incentivesclient "github.com/evmos/evmos/v9/x/incentives/client"
 	incentiveskeeper "github.com/evmos/evmos/v9/x/incentives/keeper"
@@ -145,6 +146,7 @@ import (
 	vestingtypes "github.com/evmos/evmos/v9/x/vesting/types"
 
 	feedistmodule "github.com/evmos/evmos/v9/x/feedist"
+	feedistclient "github.com/evmos/evmos/v9/x/feedist/client"
 	feedistmodulekeeper "github.com/evmos/evmos/v9/x/feedist/keeper"
 	feedistmoduletypes "github.com/evmos/evmos/v9/x/feedist/types"
 )
@@ -187,6 +189,7 @@ var (
 			// Evmos proposal types
 			erc20client.RegisterCoinProposalHandler, erc20client.RegisterERC20ProposalHandler, erc20client.ToggleTokenConversionProposalHandler,
 			incentivesclient.RegisterIncentiveProposalHandler, incentivesclient.CancelIncentiveProposalHandler,
+			feedistclient.RegisterFeedistProposalHandler, incentivesclient.CancelIncentiveProposalHandler,
 		),
 		params.AppModuleBasic{},
 		crisis.AppModuleBasic{},
@@ -434,7 +437,8 @@ func NewEvmos(
 		AddRoute(upgradetypes.RouterKey, upgrade.NewSoftwareUpgradeProposalHandler(app.UpgradeKeeper)).
 		AddRoute(ibcclienttypes.RouterKey, ibcclient.NewClientProposalHandler(app.IBCKeeper.ClientKeeper)).
 		AddRoute(erc20types.RouterKey, erc20.NewErc20ProposalHandler(&app.Erc20Keeper)).
-		AddRoute(incentivestypes.RouterKey, incentives.NewIncentivesProposalHandler(&app.IncentivesKeeper))
+		AddRoute(incentivestypes.RouterKey, incentives.NewIncentivesProposalHandler(&app.IncentivesKeeper)).
+		AddRoute(feedistmoduletypes.RouterKey, feedist.NewFeedistProposalHandler(&app.FeedistKeeper))
 
 	govKeeper := govkeeper.NewKeeper(
 		appCodec, keys[govtypes.StoreKey], app.GetSubspace(govtypes.ModuleName),
