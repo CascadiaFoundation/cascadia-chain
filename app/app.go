@@ -189,7 +189,7 @@ var (
 			// Evmos proposal types
 			erc20client.RegisterCoinProposalHandler, erc20client.RegisterERC20ProposalHandler, erc20client.ToggleTokenConversionProposalHandler,
 			incentivesclient.RegisterIncentiveProposalHandler, incentivesclient.CancelIncentiveProposalHandler,
-			feedistclient.RegisterFeedistProposalHandler, incentivesclient.CancelIncentiveProposalHandler,
+			feedistclient.RegisterFeedistProposalHandler, feedistclient.CancelFeedistProposalHandler,
 		),
 		params.AppModuleBasic{},
 		crisis.AppModuleBasic{},
@@ -226,7 +226,7 @@ var (
 		erc20types.ModuleName:          {authtypes.Minter, authtypes.Burner},
 		claimstypes.ModuleName:         nil,
 		incentivestypes.ModuleName:     {authtypes.Minter, authtypes.Burner},
-		feedistmoduletypes.ModuleName:  {authtypes.Minter, authtypes.Burner, authtypes.Staking},
+		feedistmoduletypes.ModuleName:  nil,
 	}
 
 	// module accounts that are allowed to receive tokens
@@ -833,6 +833,7 @@ func (app *Evmos) Name() string { return app.BaseApp.Name() }
 // of the new block for every registered module. If there is a registered fork at the current height,
 // BeginBlocker will schedule the upgrade plan and perform the state migration (if any).
 func (app *Evmos) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
+	fmt.Printf("==============begin block================")
 	// Perform any scheduled forks before executing the modules logic
 	app.ScheduleForkUpgrade(ctx)
 	return app.mm.BeginBlock(ctx, req)

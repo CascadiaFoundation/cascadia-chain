@@ -1,8 +1,9 @@
 package keeper
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"fmt"
 
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	ethermint "github.com/evmos/ethermint/types"
 
 	evmos "github.com/evmos/evmos/v9/types"
@@ -72,9 +73,12 @@ func (k Keeper) AllocateExponentialInflation(
 
 	// Allocate usage incentives to feedist module account
 	feedist, found := k.feedistKeeper.GetFeedist(ctx, "feedist")
-	incentives = sdk.NewCoins(k.GetProportions(ctx, mintedCoin, feedist.Rewardshares))
-
+	fmt.Printf("\n========================incentives....")
 	if found {
+		fmt.Printf("\n========================feedist found....")
+
+		incentives = sdk.NewCoins(k.GetProportions(ctx, mintedCoin, feedist.Rewardshares))
+
 		address, err := sdk.AccAddressFromHex(feedist.Contract[2:])
 		if err != nil {
 			return nil, nil, nil, err

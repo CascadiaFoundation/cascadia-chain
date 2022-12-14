@@ -22,6 +22,8 @@ func CmdRegisterFeedistProposal() *cobra.Command {
 		Short: "Submit a proposal to register a contract feedist",
 		Args:  cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
+			fmt.Printf("step0")
+
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
@@ -32,6 +34,8 @@ func CmdRegisterFeedistProposal() *cobra.Command {
 				return err
 			}
 
+			fmt.Printf("step1")
+
 			description, err := cmd.Flags().GetString(cli.FlagDescription)
 			if err != nil {
 				return err
@@ -41,6 +45,7 @@ func CmdRegisterFeedistProposal() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			fmt.Printf("step2")
 
 			deposit, err := sdk.ParseCoinsNormalized(depositStr)
 			if err != nil {
@@ -51,6 +56,7 @@ func CmdRegisterFeedistProposal() *cobra.Command {
 			argFeeShares := args[1]
 			argRewardShares := args[2]
 			argEpochs := args[3]
+			fmt.Printf("step3")
 
 			feeShares, err := sdk.NewDecFromStr(argFeeShares)
 			if err != nil {
@@ -61,6 +67,7 @@ func CmdRegisterFeedistProposal() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			fmt.Printf("step4")
 
 			epochs, err := strconv.ParseUint(argEpochs, 10, 32)
 			if err != nil {
@@ -75,13 +82,20 @@ func CmdRegisterFeedistProposal() *cobra.Command {
 				rewardShares,
 				uint32(epochs),
 			)
+			fmt.Printf("step5")
 
 			from := clientCtx.GetFromAddress()
+
+			fmt.Printf("\nstep6: %s", from)
+
 			msg, err := govtypes.NewMsgSubmitProposal(content, deposit, from)
+			fmt.Printf("\nstep7: %s %s", msg, err)
 
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
+			fmt.Printf("step6")
+
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}
@@ -105,8 +119,8 @@ func CmdCancelFeedistProposal() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "cancel-distribution [contract-address]",
 		Args:  cobra.ExactArgs(1),
-		Short: "Submit a proposal to cancel a contract incentive",
-		Long:  "Submit a proposal to cancel a contract incentive.",
+		Short: "Submit a proposal to cancel a contract feedist",
+		Long:  "Submit a proposal to cancel a contract feedist.",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {

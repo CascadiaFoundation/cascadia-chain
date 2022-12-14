@@ -83,7 +83,7 @@ func InitCmd(mbm module.BasicManager, defaultNodeHome string) *cobra.Command {
 
 			// Set default seeds
 			seeds := []string{
-				"fb20fd985d5c707eab6f3bca6e68441077732550@44.211.12.215:26656", // jerrychong
+				"", // jerrychong
 			}
 			config.P2P.Seeds = strings.Join(seeds, ",")
 
